@@ -6,6 +6,7 @@ import com.maktabsharif74.cms.springbootcmsexmaple.mapper.MediaCategoryMapper;
 import com.maktabsharif74.cms.springbootcmsexmaple.service.MediaCategoryService;
 import com.maktabsharif74.cms.springbootcmsexmaple.service.dto.MediaCategoryDTO;
 import com.maktabsharif74.cms.springbootcmsexmaple.service.dto.extra.MediaCategoryOperationDTO;
+import com.maktabsharif74.cms.springbootcmsexmaple.service.dto.extra.MediaCategoryUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,18 @@ public class MediaCategoryResource {
     public ResponseEntity<MediaCategoryDTO> save(@RequestBody @Valid MediaCategoryOperationDTO categoryDTO) {
 
         MediaCategory mediaCategory = mediaCategoryService.save(categoryDTO);
+        return ResponseEntity.ok(
+                mediaCategoryMapper.convertEntityToDTO(
+                        mediaCategory
+                )
+        );
+
+    }
+
+    @PutMapping
+    public ResponseEntity<MediaCategoryDTO> update(@RequestBody @Valid MediaCategoryUpdateDTO categoryDTO) {
+
+        MediaCategory mediaCategory = mediaCategoryService.update(categoryDTO);
         return ResponseEntity.ok(
                 mediaCategoryMapper.convertEntityToDTO(
                         mediaCategory
