@@ -24,6 +24,9 @@ public class LoginFilter implements Filter {
     @Value(value = "${login.process.path}")
     private String path;
 
+    @Value(value = "${login.cookie.name}")
+    private String cookieName;
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
@@ -39,11 +42,11 @@ public class LoginFilter implements Filter {
 
             if (user != null) {
 
-                String userInfo = user.getId() + ":" + user.getUsername() + ":" + user.getUserType();
+                String userInfo = user.getId() + ":" + user.getFirstName() + ":" + user.getUsername() + ":" + user.getUserType();
 
                 String cookieValue = Base64.getEncoder().encodeToString(userInfo.getBytes(StandardCharsets.UTF_8));
 
-                Cookie cookie = new Cookie("USER", cookieValue);
+                Cookie cookie = new Cookie(cookieName, cookieValue);
                 cookie.setMaxAge((int) TimeUnit.DAYS.toSeconds(2));
                 httpServletResponse.addCookie(cookie);
 

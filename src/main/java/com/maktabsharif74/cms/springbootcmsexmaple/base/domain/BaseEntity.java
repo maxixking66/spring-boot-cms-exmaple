@@ -1,6 +1,8 @@
 package com.maktabsharif74.cms.springbootcmsexmaple.base.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,8 @@ import java.io.Serializable;
 @MappedSuperclass
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity<ID extends Serializable> implements Serializable {
 
     @Id
