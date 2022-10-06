@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tag")
+@RequestMapping("/api/tag")
 public class TagResource extends BaseResource<Tag, TagDTO, Long, TagService, TagMapper> {
 
     public TagResource(TagService baseService, TagMapper baseMapper) {
