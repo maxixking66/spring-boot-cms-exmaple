@@ -33,4 +33,6 @@ public class User extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    private String userType;
+
 }

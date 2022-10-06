@@ -10,6 +10,7 @@
 <head>
     <title>Login</title>
     <link href="../assets/login.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <header>
@@ -22,6 +23,7 @@
             <input class="field_class" id="username" name="username" type="text" placeholder="Enter username" autofocus>
             <label for="password">Password:</label>
             <input id="password" class="field_class" name="password" type="password" placeholder="Enter password">
+            <span id="error"></span>
             <button class="submit_class" type="button" form="login_form" onclick="login()">Login</button>
         </div>
     </form>
@@ -34,6 +36,22 @@
 
 <script>
     function login() {
+        let userInfo = {
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+        };
 
+        $.ajax({
+            type: 'post',
+            url: '/login-process?username=' + userInfo.username + "&password=" + userInfo.password,
+            contentType: 'application/json',
+            success: function (response) {
+                window.location.href = '/admin-panel';
+            },
+            error: function (jqXHR, exception) {
+                document.getElementById('error').innerText
+                    = 'wrong username or password'
+            },
+        });
     }
 </script>
