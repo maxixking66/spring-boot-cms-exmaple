@@ -49,7 +49,7 @@ public class SecurityAccessFilter extends OncePerRequestFilter {
 
     private String[] getAdminPermitPaths() {
         return new String[]{
-                "/admin-panel"
+                "/admin-panel", "/api"
         };
     }
 
