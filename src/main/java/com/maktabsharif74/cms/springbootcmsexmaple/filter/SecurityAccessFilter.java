@@ -20,10 +20,12 @@ public class SecurityAccessFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 //        /assets/login.css
         String servletPath = request.getServletPath();
+        System.out.print(servletPath);
         if (
                 Arrays.stream(getPermitAllPaths())
                         .anyMatch(path -> servletPath.equals(path) || servletPath.startsWith(path))
         ) {
+            System.out.println("\tOK");
             filterChain.doFilter(request, response);
         } else if (
                 Arrays.stream(getAdminPermitPaths())
@@ -42,7 +44,8 @@ public class SecurityAccessFilter extends OncePerRequestFilter {
     private String[] getPermitAllPaths() {
         return new String[]{
                 "/assets", "/login", "/login-process",
-                "/access-denied"
+                "/access-denied", "/swagger", "/webjars",
+                "/v2/api-docs"
         };
     }
 
